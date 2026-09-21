@@ -42,6 +42,8 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# Held at 1.x: version 2 drops its backend dependencies, and Active Storage 8.1
+# loads both transformers at boot, which makes libvips mandatory everywhere.
 gem "image_processing", "~> 1.2"
 
 group :development, :test do

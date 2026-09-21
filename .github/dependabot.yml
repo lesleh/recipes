@@ -5,6 +5,20 @@ updates:
   schedule:
     interval: weekly
   open-pull-requests-limit: 10
+  ignore:
+  # Active Support 8.1 calls JSON.parse with a positional options hash, which
+  # json 3.0 removed. Taking the major bump breaks encrypted cookie decoding,
+  # so every request carrying a flash returns a 500.
+  - dependency-name: json
+    update-types:
+    - version-update:semver-major
+  # image_processing 2.0 dropped its ruby-vips and mini_magick dependencies and
+  # expects the application to declare a backend. Active Storage 8.1 requires
+  # both transformers at boot, so the major bump makes libvips a hard
+  # requirement on every machine.
+  - dependency-name: image_processing
+    update-types:
+    - version-update:semver-major
 - package-ecosystem: github-actions
   directory: "/"
   schedule:
