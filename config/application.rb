@@ -16,6 +16,11 @@ module Recipes
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
 
+    # Process Active Storage variants with ImageMagick rather than the libvips
+    # default, so image resizing works with the package installed in the
+    # Dockerfile and on developer machines without an extra dependency.
+    config.active_storage.variant_processor = :mini_magick
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
