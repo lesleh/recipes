@@ -43,6 +43,30 @@ class RecipesTest < ApplicationSystemTestCase
     assert_no_text "1 lemon"
   end
 
+  test "uploading a photo for a recipe" do
+    recipe = recipes(:tomato_pasta)
+    visit edit_recipe_path(recipe)
+
+    attach_file "Photo", file_fixture("recipe.jpg")
+    click_on "Update Recipe"
+
+    assert_text "Recipe was successfully updated."
+    assert_selector "img.recipe__image"
+    assert_predicate recipe.reload.image, :attached?
+  end
+
+  test "removing a photo" do
+    recipe = recipes(:tomato_pasta)
+    recipe.image.attach(fixture_file_upload("recipe.jpg", "image/jpeg"))
+
+    visit edit_recipe_path(recipe)
+    check "Remove the current photo"
+    click_on "Update Recipe"
+
+    assert_text "Recipe was successfully updated."
+    assert_no_selector "img.recipe__image"
+  end
+
   test "searching by ingredient" do
     visit root_path
     fill_in "Search recipes", with: "spaghetti"

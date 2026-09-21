@@ -3,6 +3,10 @@
 <article class="recipe">
   <h1><%= @recipe.title %></h1>
 
+  <% if @recipe.displayable_image? %>
+    <%= image_tag @recipe.image.variant(:display), class: "recipe__image", alt: @recipe.title %>
+  <% end %>
+
   <% if @recipe.description.present? %>
     <p class="recipe__description"><%= @recipe.description %></p>
   <% end %>
