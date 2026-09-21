@@ -1,17 +1,25 @@
 <li class="recipe-card">
-  <h2 class="recipe-card__title"><%= link_to recipe.title, recipe %></h2>
-
-  <% if recipe.description.present? %>
-    <p class="recipe-card__description"><%= truncate(recipe.description, length: 160) %></p>
+  <% if recipe.displayable_image? %>
+    <%= link_to recipe, class: "recipe-card__thumbnail" do %>
+      <%= image_tag recipe.image.variant(:thumbnail), alt: "", loading: "lazy" %>
+    <% end %>
   <% end %>
 
-  <p class="meta">
-    <% if recipe.total_time_minutes %>
-      <span><%= recipe.total_time_minutes %> min total</span>
+  <div class="recipe-card__body">
+    <h2 class="recipe-card__title"><%= link_to recipe.title, recipe %></h2>
+
+    <% if recipe.description.present? %>
+      <p class="recipe-card__description"><%= truncate(recipe.description, length: 160) %></p>
     <% end %>
-    <% if recipe.servings %>
-      <span>Serves <%= recipe.servings %></span>
-    <% end %>
-    <span><%= pluralize(recipe.ingredients.size, "ingredient") %></span>
-  </p>
+
+    <p class="meta">
+      <% if recipe.total_time_minutes %>
+        <span><%= recipe.total_time_minutes %> min total</span>
+      <% end %>
+      <% if recipe.servings %>
+        <span>Serves <%= recipe.servings %></span>
+      <% end %>
+      <span><%= pluralize(recipe.ingredients.size, "ingredient") %></span>
+    </p>
+  </div>
 </li>

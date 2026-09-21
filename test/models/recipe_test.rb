@@ -78,6 +78,35 @@ class RecipeTest < ActiveSupport::TestCase
     assert_empty Recipe.search("%")
   end
 
+  test "accepts an attached JPEG" do
+    recipe = recipes(:tomato_pasta)
+    recipe.image.attach(fixture_file_upload("recipe.jpg", "image/jpeg"))
+
+    assert_predicate recipe, :valid?
+  end
+
+  test "rejects an attachment that is not a supported image" do
+    recipe = recipes(:tomato_pasta)
+    recipe.image.attach(fixture_file_upload("notes.txt", "text/plain"))
+
+    assert_not recipe.valid?
+    assert_includes recipe.errors[:image], "must be a JPEG, PNG or WebP"
+  end
+
+  test "rejects an image over the size limit" do
+    recipe = recipes(:tomato_pasta)
+    recipe.image.attach(fixture_file_upload("recipe.jpg", "image/jpeg"))
+    recipe.save!
+    recipe.image.blob.update!(byte_size: Recipe::MAX_IMAGE_SIZE + 1)
+
+    assert_not recipe.reload.valid?
+    assert_includes recipe.errors[:image], "must be smaller than 10MB"
+  end
+
+  test "is valid with no image attached" do
+    assert_predicate recipes(:tomato_pasta), :valid?
+  end
+
   test "nested ingredient attributes with a blank name are ignored" do
     recipe = Recipe.create!(
       title: "Boiled Egg",
