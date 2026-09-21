@@ -1,0 +1,55 @@
+<% content_for :title, @recipe.title %>
+
+<article class="recipe">
+  <h1><%= @recipe.title %></h1>
+
+  <% if @recipe.description.present? %>
+    <p class="recipe__description"><%= @recipe.description %></p>
+  <% end %>
+
+  <p class="meta">
+    <% if @recipe.prep_time_minutes %>
+      <span>Prep <%= @recipe.prep_time_minutes %> min</span>
+    <% end %>
+    <% if @recipe.cook_time_minutes %>
+      <span>Cook <%= @recipe.cook_time_minutes %> min</span>
+    <% end %>
+    <% if @recipe.servings %>
+      <span>Serves <%= @recipe.servings %></span>
+    <% end %>
+  </p>
+
+  <section>
+    <h2>Ingredients</h2>
+    <% if @recipe.ingredients.any? %>
+      <ul class="ingredients">
+        <% @recipe.ingredients.each do |ingredient| %>
+          <li><%= ingredient.to_s %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="empty">No ingredients listed.</p>
+    <% end %>
+  </section>
+
+  <section>
+    <h2>Method</h2>
+    <% steps = @recipe.instruction_steps %>
+    <% if steps.any? %>
+      <ol class="steps">
+        <% steps.each do |step| %>
+          <li><%= step %></li>
+        <% end %>
+      </ol>
+    <% else %>
+      <p class="empty">No method written yet.</p>
+    <% end %>
+  </section>
+
+  <div class="actions">
+    <%= link_to "Edit", edit_recipe_path(@recipe), class: "button" %>
+    <%= button_to "Delete", @recipe, method: :delete, class: "button button--danger",
+                  form: { data: { turbo_confirm: "Delete #{@recipe.title}?" } } %>
+    <%= link_to "Back to recipes", recipes_path, class: "button button--quiet" %>
+  </div>
+</article>

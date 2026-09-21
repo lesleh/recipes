@@ -24,6 +24,19 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="site-header">
+      <div class="wrap site-header__inner">
+        <%= link_to "Recipes", root_path, class: "site-header__brand" %>
+        <%= link_to "New recipe", new_recipe_path, class: "button button--primary" %>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <% flash.each do |type, message| %>
+        <p class="flash flash--<%= type %>"><%= message %></p>
+      <% end %>
+
+      <%= yield %>
+    </main>
   </body>
 </html>

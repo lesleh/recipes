@@ -1,0 +1,19 @@
+roast_chicken:
+  title: Lemon Garlic Roast Chicken
+  description: A whole chicken roasted with lemon and garlic.
+  servings: 4
+  prep_time_minutes: 20
+  cook_time_minutes: 90
+  instructions: |
+    Heat the oven to 200C.
+    Roast for 90 minutes.
+
+tomato_pasta:
+  title: Weeknight Tomato Pasta
+  description: Twenty minutes, one pan.
+  servings: 2
+  prep_time_minutes: 5
+  cook_time_minutes: 15
+  instructions: |
+    Boil the pasta.
+    Toss through the sauce.

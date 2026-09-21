@@ -1,0 +1,19 @@
+chicken:
+  recipe: roast_chicken
+  name: whole chicken
+  quantity: "1.6"
+  unit: kg
+  position: 1
+
+lemon:
+  recipe: roast_chicken
+  name: lemon
+  quantity: "1"
+  position: 2
+
+spaghetti:
+  recipe: tomato_pasta
+  name: spaghetti
+  quantity: "200"
+  unit: g
+  position: 1

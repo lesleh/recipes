@@ -1,0 +1,17 @@
+<li class="recipe-card">
+  <h2 class="recipe-card__title"><%= link_to recipe.title, recipe %></h2>
+
+  <% if recipe.description.present? %>
+    <p class="recipe-card__description"><%= truncate(recipe.description, length: 160) %></p>
+  <% end %>
+
+  <p class="meta">
+    <% if recipe.total_time_minutes %>
+      <span><%= recipe.total_time_minutes %> min total</span>
+    <% end %>
+    <% if recipe.servings %>
+      <span>Serves <%= recipe.servings %></span>
+    <% end %>
+    <span><%= pluralize(recipe.ingredients.size, "ingredient") %></span>
+  </p>
+</li>

@@ -1,0 +1,25 @@
+<% content_for :title, "Recipes" %>
+
+<h1>Recipes</h1>
+
+<%= form_with url: recipes_path, method: :get, class: "search" do |form| %>
+  <%= form.search_field :q, value: @query, placeholder: "Search by name, description or ingredient", aria: { label: "Search recipes" } %>
+  <%= form.submit "Search", class: "button" %>
+  <% if @query.present? %>
+    <%= link_to "Clear", recipes_path, class: "button button--quiet" %>
+  <% end %>
+<% end %>
+
+<% if @recipes.any? %>
+  <ul class="recipe-list">
+    <%= render @recipes %>
+  </ul>
+<% else %>
+  <p class="empty">
+    <% if @query.present? %>
+      No recipes match "<%= @query %>".
+    <% else %>
+      No recipes yet. <%= link_to "Add the first one", new_recipe_path %>.
+    <% end %>
+  </p>
+<% end %>

@@ -1,0 +1,67 @@
+<%= form_with model: recipe, class: "form",
+              data: { controller: "nested-form" } do |form| %>
+  <% if recipe.errors.any? %>
+    <div class="errors">
+      <h2><%= pluralize(recipe.errors.count, "error") %> stopped this recipe being saved:</h2>
+      <ul>
+        <% recipe.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title, required: true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, rows: 3 %>
+  </div>
+
+  <div class="field-row">
+    <div class="field">
+      <%= form.label :servings %>
+      <%= form.number_field :servings, min: 1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :prep_time_minutes, "Prep time (minutes)" %>
+      <%= form.number_field :prep_time_minutes, min: 1 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :cook_time_minutes, "Cook time (minutes)" %>
+      <%= form.number_field :cook_time_minutes, min: 1 %>
+    </div>
+  </div>
+
+  <fieldset class="ingredients-fields">
+    <legend>Ingredients</legend>
+
+    <div data-nested-form-target="list">
+      <%= form.fields_for :ingredients do |ingredient_form| %>
+        <%= render "ingredient_fields", form: ingredient_form %>
+      <% end %>
+    </div>
+
+    <template data-nested-form-target="template">
+      <%= form.fields_for :ingredients, Ingredient.new, child_index: "NEW_RECORD" do |ingredient_form| %>
+        <%= render "ingredient_fields", form: ingredient_form %>
+      <% end %>
+    </template>
+
+    <button type="button" class="button button--quiet" data-action="nested-form#add">Add ingredient</button>
+  </fieldset>
+
+  <div class="field">
+    <%= form.label :instructions, "Method (one step per line)" %>
+    <%= form.text_area :instructions, rows: 10 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit class: "button button--primary" %>
+  </div>
+<% end %>

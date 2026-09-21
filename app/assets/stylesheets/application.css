@@ -8,3 +8,231 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+:root {
+  --ink: #1f2421;
+  --ink-soft: #5d6b63;
+  --paper: #fbfaf7;
+  --card: #ffffff;
+  --line: #e2e0d8;
+  --accent: #2f6f4e;
+  --accent-ink: #ffffff;
+  --danger: #a33a2c;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font: 16px/1.6 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Helvetica, sans-serif;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+h1 { font-size: 1.9rem; margin: 1.4rem 0 0.6rem; }
+h2 { font-size: 1.2rem; margin: 1.6rem 0 0.5rem; }
+a { color: var(--accent); }
+
+.site-header {
+  background: var(--card);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.9rem;
+}
+
+.site-header__brand {
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+main.wrap { padding-bottom: 4rem; }
+
+/* Buttons */
+
+.button,
+input[type="submit"] {
+  display: inline-block;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+  color: var(--ink);
+  font: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button:hover,
+input[type="submit"]:hover { border-color: var(--ink-soft); }
+
+.button--primary,
+input[type="submit"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.button--danger { color: var(--danger); }
+.button--quiet { background: transparent; }
+
+/* Flash and empty states */
+
+.flash {
+  margin: 1rem 0 0;
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius);
+  background: #e8f1ea;
+  border: 1px solid #c6ddcd;
+}
+
+.flash--alert { background: #fbeae7; border-color: #edc6bf; }
+.empty { color: var(--ink-soft); }
+
+.errors {
+  margin-bottom: 1.2rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid #edc6bf;
+  border-radius: var(--radius);
+  background: #fbeae7;
+}
+
+.errors h2 { margin-top: 0; font-size: 1rem; }
+.errors ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+
+/* Search */
+
+.search {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 1.6rem;
+}
+
+.search input[type="search"] {
+  flex: 1;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font: inherit;
+  background: var(--card);
+}
+
+/* Recipe list */
+
+.recipe-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.recipe-card {
+  padding: 1rem 1.1rem;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.recipe-card__title { margin: 0; font-size: 1.15rem; }
+.recipe-card__title a { text-decoration: none; }
+.recipe-card__description { margin: 0.4rem 0 0; color: var(--ink-soft); }
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0.6rem 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+
+/* Recipe detail */
+
+.recipe__description { color: var(--ink-soft); }
+.ingredients, .steps { padding-left: 1.2rem; }
+.ingredients li, .steps li { margin-bottom: 0.35rem; }
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 2rem;
+}
+
+.actions form { margin: 0; }
+
+/* Forms */
+
+.form { margin-bottom: 1.5rem; }
+.field { margin-bottom: 1rem; }
+
+.field label {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.field input[type="text"],
+.field input[type="number"],
+.field textarea {
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font: inherit;
+  background: var(--card);
+}
+
+.field-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.field-row .field { flex: 1 1 150px; }
+
+.ingredients-fields {
+  margin: 0 0 1.4rem;
+  padding: 0.9rem 1rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--card);
+}
+
+.ingredients-fields legend { font-weight: 600; padding: 0 0.3rem; }
+
+.ingredient-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.ingredient-fields input {
+  padding: 0.45rem 0.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  font: inherit;
+}
+
+.ingredient-fields__quantity { width: 5rem; }
+.ingredient-fields__unit { width: 5rem; }
+.ingredient-fields__name { flex: 1 1 10rem; }

@@ -1,0 +1,10 @@
+<div class="ingredient-fields" data-nested-form-target="row">
+  <%# Emitted here rather than letting fields_for append it after the row, so that
+      the remove button can tell a saved ingredient from a new one. %>
+  <%= form.hidden_field :id if form.object.persisted? %>
+  <%= form.text_field :quantity, placeholder: "200", aria: { label: "Quantity" }, class: "ingredient-fields__quantity" %>
+  <%= form.text_field :unit, placeholder: "g", aria: { label: "Unit" }, class: "ingredient-fields__unit" %>
+  <%= form.text_field :name, placeholder: "Plain flour", aria: { label: "Ingredient" }, class: "ingredient-fields__name" %>
+  <%= form.hidden_field :_destroy, value: "0" %>
+  <button type="button" class="button button--quiet" data-action="nested-form#remove">Remove</button>
+</div>
